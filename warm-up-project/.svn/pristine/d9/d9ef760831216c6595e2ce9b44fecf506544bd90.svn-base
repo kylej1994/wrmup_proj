@@ -1,0 +1,19 @@
+
+*** Your name here ***
+CS22001 Warm-up Project written answers
+
+Please add your written answers to the question in the assignment specification
+to this file! *** ONLY ANSWERS IN THIS EXACT FILE WILL BE GRADED! ***
+
+1. stl map
+
+  a) Why do you think we chose to use an stl map object to store the collection of People within the Community class? 
+
+2. inbox
+	a) The inbox of each Person is private. We made this design choice explicitly. Why do you think we did this?
+	b) [Optional Bonus Question] Say you wanted to add privacy options to the Person class. Say that you wanted to provide a setting that allowed Person objects to restrict the messages they receive to messages from people within their Community. Explain in words (and code snippets if you prefer) how you would go about doing this.
+
+3. design review
+
+	a) What was the best or most clever part of the specification we provided, in terms of design?
+	b) What was the worst or most structurally awkward part?
