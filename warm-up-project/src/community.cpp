@@ -13,9 +13,7 @@ string Community::get_name() {
 }
 
 bool Community::set_name(string _name) {
-	//TODO (done)
-	// set name
-    name = _name
+    name = _name;
     return true;
 }
 
