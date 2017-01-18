@@ -10,6 +10,15 @@ protected:
 
 // test get_username and set_username
 TEST_F(test_person, test_username) {
+	EXPECT_FALSE(person.set_username(""));
+	EXPECT_FALSE(person.set_username("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm"));
+	EXPECT_FALSE(person.set_username("1c"));
+	EXPECT_FALSE(person.set_username("1"));
+	EXPECT_FALSE(person.set_username("a^b"));
+	EXPECT_FALSE(person.set_username("b)"));
+	EXPECT_TRUE(person.set_username("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl"));
+	EXPECT_STREQ(person.get_username, "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl");
+
 }
 
 // test get_firstname and set_firstname
