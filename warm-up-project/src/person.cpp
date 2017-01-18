@@ -143,18 +143,25 @@ bool Person::set_info(string _username, string _firstname, string _lastname,
 }
 
 void Person::send_msg(Person &recipient, string msg) {
-	// TODO
-	// send message
+	// TODO (done)
+	recipient.get_msg(msg);
 }
 
 void Person::get_msg(string msg) {
-	// TODO
+	// TODO (done)
 	// get message
+    inbox.push(msg);
 }
 
 bool Person::read_msg() {
-	// TODO
+	// TODO (done)
 	// print the message if there any message inbox
+    if (!inbox.empty()) {
+        cout << inbox.front();
+        inbox.pop();
+        return true;
+    }
+    cout << "No messages inbox";
     return false;
 }
 

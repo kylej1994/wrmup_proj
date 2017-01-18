@@ -84,9 +84,23 @@ list<Person> Community::find_member(int age_lb, int age_ub) {
 }
 
 bool Community::send_msg(list<string> usernames, string msg) {
-	//TODO
+	//TODO (done) i think
 	// send msg to a Person addressed by username
 	// make sure the username is validated
-	return false;
+  list<string>::iterator iter;
+  bool found = true;
+  for (iter = usernames.begin(); iter != usernames.end(); iter++) {
+    Person p = people.find(iter);
+    if (p == people.end()) {
+      p.get_msg(msg);
+    } else {
+      for (auto const& x : people) {
+        Person curr_p = x.second;
+        curr_p.get_msg(msg);
+      }
+      found = false;
+    }
+  }
+	return found;
 }
 
