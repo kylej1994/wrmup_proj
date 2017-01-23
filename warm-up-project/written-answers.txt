@@ -7,13 +7,21 @@ to this file! *** ONLY ANSWERS IN THIS EXACT FILE WILL BE GRADED! ***
 
 1. stl map
 
-  a) Why do you think we chose to use an stl map object to store the collection of People within the Community class? 
+  a) Why do you think we chose to use an stl map object to store the collection of People within the Community class?
+  	The stl map object has O(1) access time for each Person, which has very good performance. Though names
+  	are not necessarily unique, collisons should be relatively few within the stl map object.
 
 2. inbox
 	a) The inbox of each Person is private. We made this design choice explicitly. Why do you think we did this?
+	For privacy and security reasons, the messages that a Person receives should not be publicly available.
+	The only way to access the messages in the inbox is through get_msg().
 	b) [Optional Bonus Question] Say you wanted to add privacy options to the Person class. Say that you wanted to provide a setting that allowed Person objects to restrict the messages they receive to messages from people within their Community. Explain in words (and code snippets if you prefer) how you would go about doing this.
+	I would add to Person an int flag that represents this message privacy setting and a field called community_name that is a string of the name of the Community that the Person is in. Then, in the send_msg() function, I would check if this flag is toggled. If so, then the sender's community_name must match the recipient's community_name, otherwise, the message is not sent.
 
 3. design review
 
 	a) What was the best or most clever part of the specification we provided, in terms of design?
+	The Person class fields can only be modified by the setter methods, which are good because they 
+	ensure that these field values are always valid.
 	b) What was the worst or most structurally awkward part?
+	The stl map indexes on a Person's name, which is not a unique field. The stl map could assign a person_id to each Person instead to prevent hash table collisions. 
