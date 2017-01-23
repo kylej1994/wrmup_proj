@@ -77,7 +77,7 @@ list<Person> Community::find_member(int age_lb, int age_ub) {
   {
       Person curr_p = x.second;
       int user_age = curr_p.get_age();
-      if (user_age >= age_lb || user_age <= age_lb)
+      if (user_age >= age_lb || user_age <= age_ub)
         ret.push_back(curr_p);
   }
   return ret;
