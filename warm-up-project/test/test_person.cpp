@@ -17,7 +17,7 @@ TEST_F(test_person, test_username) {
 	EXPECT_FALSE(person.set_username("a^b"));
 	EXPECT_FALSE(person.set_username("b)"));
 	EXPECT_TRUE(person.set_username("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl"));
-	EXPECT_STREQ(person.get_username, "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl");
+	EXPECT_STREQ(person.get_username().c_str(), "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl");
 
 }
 
@@ -30,7 +30,7 @@ TEST_F(test_person, test_firstname) {
 	EXPECT_FALSE(person.set_firstname("a^b"));
 	EXPECT_FALSE(person.set_firstname("b)"));
 	EXPECT_TRUE(person.set_firstname("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl"));
-	EXPECT_STREQ(person.get_firstname, "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl");
+	EXPECT_STREQ(person.get_firstname().c_str(), "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl");
 }
 
 // test get_lastname and set_lastname
@@ -53,9 +53,9 @@ TEST_F(test_person, test_gender) {
 	EXPECT_FALSE(person.set_gender("a"));
 	EXPECT_FALSE(person.set_gender(""));
 	EXPECT_TRUE(person.set_gender("f"));
-	EXPECT_STREQ(person.get_gender(), "f");
+	EXPECT_STREQ(person.get_gender().c_str(), "f");
 	EXPECT_TRUE(person.set_gender("m"));
-	EXPECT_STREQ(person.get_gender(), "m");
+	EXPECT_STREQ(person.get_gender().c_str(), "m");
 }
 
 // test get_age and set_age
@@ -84,7 +84,7 @@ TEST_F(test_person, test_tagline) {
 	EXPECT_TRUE(person.set_tagline("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde"));
 	EXPECT_FALSE(person.set_tagline("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdef"));
 	EXPECT_TRUE(person.set_tagline(""));
-	EXPECT_STREQ(person.get_tagline(), "");
+	EXPECT_STREQ(person.get_tagline().c_str(), "");
 }
 
 // test get_info and set_info

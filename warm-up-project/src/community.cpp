@@ -88,19 +88,19 @@ bool Community::send_msg(list<string> usernames, string msg) {
 	// send msg to a Person addressed by username
 	// make sure the username is validated
   list<string>::iterator iter;
-  bool found = true;
   for (iter = usernames.begin(); iter != usernames.end(); iter++) {
-    Person p = people.find(iter);
-    if (p == people.end()) {
-      p.get_msg(msg);
+    map<string, Person>::iterator it = people.find(iter->c_str());
+    if (it != people.end()) {
+      it->second.get_msg(msg);
     } else {
+      //if person not found, sends to everyone in community
       for (auto const& x : people) {
         Person curr_p = x.second;
         curr_p.get_msg(msg);
       }
-      found = false;
+      return false;
     }
   }
-	return found;
+	return true;
 }
 
