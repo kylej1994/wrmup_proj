@@ -54,9 +54,9 @@ bool Person::set_username(string _username) {
 	// write the function for set_username
     //A Person's username can have a maximum of 64 characters and must have alphanumeric 
     //characters only. Also, it can not start with a digit. Finally, it cannot be the empty string.
-    bool not_empty = !_username.compare("");
+    bool not_empty = _username.compare("");
     bool is_less_64 = _username.length() <= 64;
-    bool is_all_alphanumeric = std::regex_match(_username, std::regex("^[^0-9][A-Za-z0-9]*$"));
+    bool is_all_alphanumeric = std::regex_match(_username, std::regex("^[^0-9]{1}[A-Za-z]*$"));
     if (not_empty && is_all_alphanumeric && is_less_64){
         username = _username;
     	return true;
@@ -68,7 +68,7 @@ bool Person::set_firstname(string _firstname) {
     // TODO (done)
     //A Person's firstname and lastname can have a maximum of 64 characters, and must contain only alphabetic characters.
     bool is_less_64 = _firstname.length() <= 64;
-    bool is_all_alphabetic = std::regex_match(_firstname, std::regex("[A-Za-z]*"));
+    bool is_all_alphabetic = std::regex_match(_firstname, std::regex("^[A-Za-z]*$"));
 	if (is_all_alphabetic && is_less_64) {
         firstname = _firstname;
         return true;
