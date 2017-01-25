@@ -16,7 +16,7 @@ string Community::get_name() {
 
 bool Community::set_name(string _name) {
     bool not_empty = _name.compare("");
-    bool alphanumeric = std::regex_match(_name, std::regex("^[^0-9]{1}[A-Za-z]*$"));
+    bool alphanumeric = std::regex_match(_name, std::regex("^[^0-9]{1}[A-Za-z0-9]*$"));
     bool max_128 = _name.length() <= 128;
     if (not_empty && alphanumeric && max_128)
     {    
