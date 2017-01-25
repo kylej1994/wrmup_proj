@@ -1,4 +1,5 @@
 #include <regex>
+#include <string>
 #include "person.h"
 
 bool str_isalpha(const string str){
@@ -45,8 +46,9 @@ string Person::get_tagline() {
     return tagline;
 }
 string Person::get_info() {
-	string ret = "";
-    return ret;
+	return "username: " + username + " firstname: " + firstname + " lastname: " + 
+        lastname + " gender: " + gender + " age: " + std::to_string(age) + " tagline: " + 
+        tagline;
 }
 
 bool Person::set_username(string _username) {
@@ -56,7 +58,7 @@ bool Person::set_username(string _username) {
     //characters only. Also, it can not start with a digit. Finally, it cannot be the empty string.
     bool not_empty = _username.compare("");
     bool is_less_64 = _username.length() <= 64;
-    bool is_all_alphanumeric = std::regex_match(_username, std::regex("^[^0-9]{1}[A-Za-z]*$"));
+    bool is_all_alphanumeric = std::regex_match(_username, std::regex("^[^0-9]{1}[A-Za-z0-9]*$"));
     if (not_empty && is_all_alphanumeric && is_less_64){
         username = _username;
     	return true;
@@ -70,7 +72,7 @@ bool Person::set_firstname(string _firstname) {
     bool is_less_64 = _firstname.length() <= 64;
     bool is_all_alphabetic = std::regex_match(_firstname, std::regex("^[A-Za-z]*$"));
 	if (is_all_alphabetic && is_less_64) {
-        firstname = _firstname;
+        firstname = _firstname; 
         return true;
     }
     else {
