@@ -13,14 +13,26 @@ protected:
 
 // test get_name
 TEST_F(test_community, get_name) {
+    community.set_name("abcdefg");
+    EXPECT_STREQ(community.get_name().c_str(), "abcdefg");
 }
 
 // test set_name
 TEST_F(test_community, set_name) {
+    string str_len_128 = "ssdfopijasdopfidsafdsapofijsadpofiaspjfdsaopfdjsdiopajfdsaiodsafjdsifoapjdsfsdfjsdajfpiodsajiofdspajfiodspjfiodsxcvjopixzvjpxzvd";
+    string str_len_129 = "ssdfopijasdopfidsafdsapofijsadpofiaspjfdsaopfdjsdiopajfdsaiodsafjdsifoapjdsfsdfjsdajfpiodsajiofdspajfiodspjfiodsxcvjopixzvjpxzvdf";
+    EXPECT_FALSE(community.set_name(""));
+    EXPECT_FALSE(community.set_name("3456"));
+    EXPECT_TRUE(community.set_name("abcdefg"));
+    EXPECT_FALSE(community.set_name("abcd123421!!!"));
+    EXPECT_FALSE(community.set_name(str_len_129));
+    EXPECT_TRUE(community.set_name(str_len_128));
 }
 
 // test add_person
 TEST_F(test_community, add_person) {
+   Person p;
+   EXPECT_FALSE(community.add_person(p));
 }
 
 // test get_all_usernames

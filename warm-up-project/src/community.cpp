@@ -1,4 +1,6 @@
 #include "community.h"
+#include <regex>
+#include <cctype>
 
 Community::Community()
   : name(""), people(map<string,Person>()) {
@@ -13,14 +15,22 @@ string Community::get_name() {
 }
 
 bool Community::set_name(string _name) {
-    name = _name;
-    return true;
+    bool not_empty = _name.compare("");
+    bool alphanumeric = std::regex_match(_name, std::regex("^[^0-9]{1}[A-Za-z]*$"));
+    bool max_128 = _name.length() <= 128;
+    if (not_empty && alphanumeric && max_128)
+    {    
+        name = _name;
+        return true;
+    }
+    return false;
 }
 
 bool Community::add_person(Person _person) {
-    contact to_add(_person.get_username(), _person);
-    
+
+    contact to_add(_person.get_username(), _person); 
     return false;
+
 }
 
 // return the person object for a given username
