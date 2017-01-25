@@ -56,6 +56,10 @@ bool Person::set_username(string _username) {
 	// write the function for set_username
     //A Person's username can have a maximum of 64 characters and must have alphanumeric 
     //characters only. Also, it can not start with a digit. Finally, it cannot be the empty string.
+    if (_username == "" && username == "" && firstname == "" && lastname == "" 
+        && gender == "" && age == 0 && tagline == "") {
+        return true;
+    }
     bool not_empty = _username.compare("");
     bool is_less_64 = _username.length() <= 64;
     bool is_all_alphanumeric = std::regex_match(_username, std::regex("^[^0-9]{1}[A-Za-z0-9]*$"));
@@ -132,12 +136,12 @@ bool Person::set_tagline(string _tagline) {
 bool Person::set_info(string _username, string _firstname, string _lastname,
                       int _age, string _tagline, string _gender) {
     // TODO (done)
-    bool su = set_username(_username);
     bool fn = set_firstname(_firstname);
     bool ln = set_lastname(_lastname);
     bool age = set_age(_age);
     bool tl = set_tagline(_tagline);
     bool gd = set_gender(_gender);
+    bool su = set_username(_username);
     return su && fn && ln && age && tl && gd;
 }
 
@@ -156,11 +160,11 @@ bool Person::read_msg() {
 	// TODO (done)
 	// print the message if there any message inbox
     if (!inbox.empty()) {
-        cout << inbox.front();
+        cout << inbox.front() + "\n";
         inbox.pop();
         return true;
     }
-    cout << "No messages inbox";
+    cout << "No messages inbox\n";
     return false;
 }
 

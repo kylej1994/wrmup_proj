@@ -10,7 +10,7 @@ protected:
 
 // test get_username and set_username
 TEST_F(test_person, test_username) {
-	EXPECT_FALSE(person.set_username(""));
+	EXPECT_TRUE(person.set_username(""));
 	EXPECT_FALSE(person.set_username("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm"));
 	EXPECT_FALSE(person.set_username("1c"));
 	EXPECT_FALSE(person.set_username("1"));
@@ -21,6 +21,9 @@ TEST_F(test_person, test_username) {
 	EXPECT_STREQ(person.get_username().c_str(), "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl");
 	EXPECT_TRUE(person.set_username("a22222"));
 	EXPECT_TRUE(person.set_username("a2aawiuer"));
+	//once person is not null person, username cannot be empty string
+	person.set_firstname("hello");
+	EXPECT_FALSE(person.set_username(""));
 }
 
 // test get_firstname and set_firstname
@@ -100,7 +103,8 @@ TEST_F(test_person, test_info) {
 	string good_info = "username: " + good_username + " firstname: " + good_firstname + " lastname: " + 
         good_lastname + " gender: " + good_gender + " age: " + std::to_string(good_age) + " tagline: " + 
         good_tagline;
-	string bad_username = "";
+	string empty_username = "";
+	string bad_username = "1a";
 	string bad_firstname = "23";
 	string bad_lastname = "asd13";
 	string bad_gender = "asdf";
@@ -109,6 +113,7 @@ TEST_F(test_person, test_info) {
 	string bad_info = "username:  firstname:  lastname:  gender:  age: 0 tagline: ";
 
 
+	EXPECT_FALSE(person.set_info(empty_username, bad_firstname, bad_lastname, bad_age, bad_tagline, bad_gender));
 	EXPECT_FALSE(person.set_info(bad_username, bad_firstname, bad_lastname, bad_age, bad_tagline, bad_gender));
 	EXPECT_STREQ(person.get_info().c_str(), bad_info.c_str());
 	EXPECT_FALSE(person.set_info(bad_username, good_firstname, good_lastname, good_age, good_tagline, good_gender));
@@ -125,6 +130,19 @@ TEST_F(test_person, test_info) {
 //   to make your code shorter, we suggest combining these tests together; you
 //   can also separate them into several test cases
 TEST_F(test_person, test_msg) {
+	string msg1 = "msg1";
+	string msg2 = "msg2";
+	string msg3 = "msg3";
 
+	EXPECT_FALSE(person.read_msg());
+	EXPECT_FALSE(recipient.read_msg());
+	person.send_msg(recipient, msg1);
+	person.send_msg(recipient, msg2);
+	person.send_msg(recipient, msg3);
+	EXPECT_TRUE(recipient.read_msg());
+	EXPECT_TRUE(recipient.read_msg());
+	EXPECT_TRUE(recipient.read_msg());
+	EXPECT_FALSE(recipient.read_msg());
+	EXPECT_FALSE(person.read_msg());
 }
 
