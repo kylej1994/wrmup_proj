@@ -158,8 +158,8 @@ TEST_F(test_community, find_member) {
 // test get_member
 TEST_F(test_community, get_member) {
     Person p1, p2, p3;
-    p1.set_username("user1");
-    p2.set_username("user2");
+    p1.set_firstname("user1");
+    p2.set_firstname("user2");
     
     community.add_person(p1);
     community.add_person(p2);
@@ -167,7 +167,7 @@ TEST_F(test_community, get_member) {
     Person result1 = community.get_member("user1"); //found
     Person result2 = community.get_member(""); //no response
     Person result3 = community.get_member("user27"); //new object
-    // EXPECT_STREQ(result1.get_info().c_str(), p1.get_info().c_str());
+    EXPECT_STREQ(result1.get_info().c_str(), p1.get_info().c_str());
     // EXPECT_STRNE(result1.get_info().c_str(), p2.get_info().c_str());
     EXPECT_STRNE(result2.get_info().c_str(), p1.get_info().c_str());
     // EXPECT_STREQ(result2.get_info().c_str(), p2.get_info().c_str());
@@ -178,20 +178,20 @@ TEST_F(test_community, get_member) {
 
 // test send_msg
 TEST_F(test_community, send_msg) {
-    Person p1, p2, p3;
-    string s1, s2, s3;
-    s1 = "p1user";
-    s2 = "p2user";
-    s3 = "p3user";
-    p1.set_username(s1);
-    p2.set_username(s2);
-    p3.set_username(s3);
-    usernames.push_back(s1);
-    usernames.push_back(s2);
-    usernames.push_back(s3);
-    community.add_person(p1);
-    community.add_person(p2);
-    community.add_person(p3);
+    // Person p1, p2, p3;
+    // string s1, s2, s3;
+    // s1 = "p1user";
+    // s2 = "p2user";
+    // s3 = "p3user";
+    // p1.set_username(s1);
+    // p2.set_username(s2);
+    // p3.set_username(s3);
+    // usernames.push_back(s1);
+    // usernames.push_back(s2);
+    // usernames.push_back(s3);
+    // community.add_person(p1);
+    // community.add_person(p2);
+    // community.add_person(p3);
     // EXPECT_TRUE();
     // EXPECT_FALSE();
 }
