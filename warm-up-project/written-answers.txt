@@ -25,3 +25,4 @@ to this file! *** ONLY ANSWERS IN THIS EXACT FILE WILL BE GRADED! ***
 	ensure that these field values are always valid.
 	b) What was the worst or most structurally awkward part?
 	The stl map indexes on a Person's name, which is not a unique field. The stl map could assign a person_id to each Person instead to prevent hash table collisions. 
+	In addition, the mapping to People in the community field stores copies of Person objects, rather than pointers to the objects themselves. This makes sending messages almost impossible, since a message would only be sent to a copy of a person, similarly receiving copies of a person makes it impossible to verify if a message was actually sent. The solution, again is to store pointers to person objects.
