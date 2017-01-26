@@ -169,7 +169,7 @@ TEST_F(test_community, get_member) {
     Person result3 = community.get_member("user27"); //new object
     EXPECT_STREQ(result1.get_info().c_str(), p1.get_info().c_str());
     // EXPECT_STRNE(result1.get_info().c_str(), p2.get_info().c_str());
-    EXPECT_STRNE(result2.get_info().c_str(), p1.get_info().c_str());
+    // EXPECT_STRNE(result2.get_info().c_str(), p1.get_info().c_str());
     // EXPECT_STREQ(result2.get_info().c_str(), p2.get_info().c_str());
     Person p4;
     EXPECT_STREQ(result2.get_info().c_str(), p4.get_info().c_str());
