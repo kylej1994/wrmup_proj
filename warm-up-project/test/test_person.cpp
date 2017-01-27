@@ -111,11 +111,11 @@ TEST_F(test_person, test_info) {
 	string bad_tagline = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdef";
 	int bad_age = -1;
 	string bad_info = "username:  firstname:  lastname:  gender:  age: 0 tagline: ";
-
-
+	
 	EXPECT_FALSE(person.set_info(empty_username, bad_firstname, bad_lastname, bad_age, bad_tagline, bad_gender));
 	EXPECT_FALSE(person.set_info(bad_username, bad_firstname, bad_lastname, bad_age, bad_tagline, bad_gender));
 	EXPECT_STREQ(person.get_info().c_str(), bad_info.c_str());
+	//tests all cases where one parameter is bad
 	EXPECT_FALSE(person.set_info(bad_username, good_firstname, good_lastname, good_age, good_tagline, good_gender));
 	EXPECT_FALSE(person.set_info(good_username, bad_firstname, good_lastname, good_age, good_tagline, good_gender));
 	EXPECT_FALSE(person.set_info(good_username, good_firstname, bad_lastname, good_age, good_tagline, good_gender));
