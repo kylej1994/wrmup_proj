@@ -28,14 +28,14 @@ bool Community::set_name(string _name) {
 
 bool Community::add_person(Person _person) {
 
-    contact to_add(_person.get_username(), _person);
+    // contact to_add(_person.get_username(), _person);
     map<string,Person>::iterator it;
 
     it = people.find(_person.get_username());
     if (it != people.end())
       return false;
 
-    people.insert(to_add); 
+    people.insert(std::pair<string, Person>(_person.get_username(), _person)); 
     return true;
 
 }
@@ -88,13 +88,14 @@ list<Person> Community::find_member(string firstname) {
 
 list<Person> Community::find_member(int age_lb, int age_ub) {
   list<Person> ret;
+  map<string, Person>::iterator iter;
   //TODO (done)
   // find users within certain ages [age_lb, age_ub], both lower bound and upper bound shall be inclusive
   for (auto const& x : people)
   {
       Person curr_p = x.second;
-      printf("%d\n", curr_p.get_age());
       int user_age = curr_p.get_age();
+      printf("%d", user_age);
       if (user_age >= age_lb && user_age <= age_ub)
         ret.push_back(curr_p);
   }

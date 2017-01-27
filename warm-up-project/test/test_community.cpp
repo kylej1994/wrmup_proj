@@ -142,24 +142,17 @@ TEST_F(test_community, find_member) {
     }   
 
     //All people 
-    printf("p1: %s\n", p1.get_info().c_str());
-    printf("p2: %s\n", p2.get_info().c_str());
-    printf("=================\n");
     list<Person> correct4;
     correct4.push_back(p1);
     correct4.push_back(p2);
     correct4.push_back(p3);
-    // for (iter1 = result3.begin(), iter2 = correct4.begin(); iter2 != result3.end() && iter2 != correct4.end(); ++iter1, ++iter2)
-    // {
-    //     // EXPECT_STREQ((*iter1).get_info().c_str(), (*iter2).get_info().c_str());
-    //     printf("iter1: %s\n", (*iter1).get_info().c_str());
-    //     printf("iter2: %s\n", (*iter2).get_info().c_str());
-    //     printf("\n");
-    // }
-    // for (iter1 = result3.begin(), iter2 = correct4.begin(); iter1 != result3.end() && iter2 != correct4.end(); ++iter1, ++iter2)
-    for (iter1 = result3.begin(); iter1 != result3.end(); ++iter1)
-        printf("iter1: %s\n", (*iter1).get_info().c_str());
-        // printf("iter1: %s\n iter2: %s\n", (*iter1).get_info().c_str(), (*iter2).get_info().c_str());
+    for (iter1 = result3.begin(), iter2 = correct4.begin(); iter2 != result3.end() && iter2 != correct4.end(); ++iter1, ++iter2)
+    {
+        EXPECT_STREQ((*iter1).get_info().c_str(), (*iter2).get_info().c_str());
+        // printf("iter1: %s\n", (*iter1).get_info().c_str());
+        // printf("iter2: %s\n", (*iter2).get_info().c_str());
+        // printf("\n");
+    }
 
 
     //Test for equality
