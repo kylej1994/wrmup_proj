@@ -99,6 +99,9 @@ TEST_F(test_community, find_member) {
     p1.set_firstname("John");
     p2.set_firstname("Kyle");
     p3.set_firstname("John");
+    p1.set_username("John");
+    p2.set_username("Kyle");
+    p3.set_username("John2");
     p1.set_age(20);
     p2.set_age(30);
     p3.set_age(35);
@@ -142,16 +145,14 @@ TEST_F(test_community, find_member) {
     }   
 
     //All people 
+    /*HARD CODED IN --ORDER-- OF PERSONS TO MATCH MAPPINGS*/
     list<Person> correct4;
     correct4.push_back(p1);
-    correct4.push_back(p2);
     correct4.push_back(p3);
+    correct4.push_back(p2);
     for (iter1 = result3.begin(), iter2 = correct4.begin(); iter2 != result3.end() && iter2 != correct4.end(); ++iter1, ++iter2)
     {
         EXPECT_STREQ((*iter1).get_info().c_str(), (*iter2).get_info().c_str());
-        // printf("iter1: %s\n", (*iter1).get_info().c_str());
-        // printf("iter2: %s\n", (*iter2).get_info().c_str());
-        // printf("\n");
     }
 
 
