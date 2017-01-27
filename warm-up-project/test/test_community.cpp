@@ -32,8 +32,12 @@ TEST_F(test_community, set_name) {
 // test add_person
 TEST_F(test_community, add_person) {
    Person p, q;
-   EXPECT_FALSE(community.add_person(p));
+   EXPECT_TRUE(community.add_person(p));
    EXPECT_FALSE(community.add_person(q));
+   EXPECT_FALSE(community.add_person(p));
+   Person p2;
+   p2.set_info("user1", "user1", "user ", 2, "hello", "m");
+   EXPECT_TRUE(community.add_person(p2));
 }
 
 // test get_all_usernames
@@ -76,11 +80,11 @@ TEST_F(test_community, get_all_usernames) {
 
     list <string> usernames2;
     usernames2.push_back(s3);
-    usernames2.push_back(s2);
     usernames2.push_back(s1);
+    usernames2.push_back(s2);
     iter1 = usernames2.begin();
     iter2 = comm_usernames.begin();
-     for (; iter1 != usernames2.end() && iter2 != comm_usernames.end(); ++iter1, ++iter2)
+    for (; iter1 != usernames2.end() && iter2 != comm_usernames.end(); ++iter1, ++iter2)
     {
         EXPECT_STRNE(iter1->c_str(), iter2->c_str());
     }   
@@ -100,6 +104,7 @@ TEST_F(test_community, find_member) {
     p3.set_age(35);
     community.add_person(p1);
     community.add_person(p2);
+    community.add_person(p3);
     list<Person> result1 = community.find_member("John"); //should find 2 people
     list<Person> result2 = community.find_member("Joe"); //no response
     list<Person> result3 = community.find_member(10, 50); //all people
@@ -137,14 +142,25 @@ TEST_F(test_community, find_member) {
     }   
 
     //All people 
-    // list<Person> correct4;
-    // correct4.push_back(p1);
-    // correct4.push_back(p2);
+    printf("p1: %s\n", p1.get_info().c_str());
+    printf("p2: %s\n", p2.get_info().c_str());
+    printf("=================\n");
+    list<Person> correct4;
+    correct4.push_back(p1);
+    correct4.push_back(p2);
+    correct4.push_back(p3);
     // for (iter1 = result3.begin(), iter2 = correct4.begin(); iter2 != result3.end() && iter2 != correct4.end(); ++iter1, ++iter2)
     // {
     //     // EXPECT_STREQ((*iter1).get_info().c_str(), (*iter2).get_info().c_str());
-    //     printf("%s\n", (*iter1).get_info().c_str());
+    //     printf("iter1: %s\n", (*iter1).get_info().c_str());
+    //     printf("iter2: %s\n", (*iter2).get_info().c_str());
+    //     printf("\n");
     // }
+    // for (iter1 = result3.begin(), iter2 = correct4.begin(); iter1 != result3.end() && iter2 != correct4.end(); ++iter1, ++iter2)
+    for (iter1 = result3.begin(); iter1 != result3.end(); ++iter1)
+        printf("iter1: %s\n", (*iter1).get_info().c_str());
+        // printf("iter1: %s\n iter2: %s\n", (*iter1).get_info().c_str(), (*iter2).get_info().c_str());
+
 
     //Test for equality
     list<Person> correct5;
@@ -158,8 +174,8 @@ TEST_F(test_community, find_member) {
 // test get_member
 TEST_F(test_community, get_member) {
     Person p1, p2, p3;
-    p1.set_firstname("user1");
-    p2.set_firstname("user2");
+    p1.set_info("user1", "user1", "user ", 2, "hello", "m");
+    p2.set_info("user2", "user12", "user ", 2, "hello", "m");
     
     community.add_person(p1);
     community.add_person(p2);
@@ -168,9 +184,9 @@ TEST_F(test_community, get_member) {
     Person result2 = community.get_member(""); //no response
     Person result3 = community.get_member("user27"); //new object
     EXPECT_STREQ(result1.get_info().c_str(), p1.get_info().c_str());
-    // EXPECT_STRNE(result1.get_info().c_str(), p2.get_info().c_str());
-    // EXPECT_STRNE(result2.get_info().c_str(), p1.get_info().c_str());
-    // EXPECT_STREQ(result2.get_info().c_str(), p2.get_info().c_str());
+    EXPECT_STRNE(result1.get_info().c_str(), p2.get_info().c_str());
+    EXPECT_STRNE(result2.get_info().c_str(), p1.get_info().c_str());
+    EXPECT_STREQ(result2.get_info().c_str(), p3.get_info().c_str());
     Person p4;
     EXPECT_STREQ(result2.get_info().c_str(), p4.get_info().c_str());
 
@@ -178,21 +194,24 @@ TEST_F(test_community, get_member) {
 
 // test send_msg
 TEST_F(test_community, send_msg) {
-    // Person p1, p2, p3;
-    // string s1, s2, s3;
-    // s1 = "p1user";
-    // s2 = "p2user";
-    // s3 = "p3user";
-    // p1.set_username(s1);
-    // p2.set_username(s2);
-    // p3.set_username(s3);
-    // usernames.push_back(s1);
-    // usernames.push_back(s2);
-    // usernames.push_back(s3);
-    // community.add_person(p1);
-    // community.add_person(p2);
-    // community.add_person(p3);
-    // EXPECT_TRUE();
-    // EXPECT_FALSE();
+    Person p1, p2, p3;
+    string s1, s2, s3;
+    list<string> usernames;
+    s1 = "p1user";
+    s2 = "p2user";
+    s3 = "p3user";
+    p1.set_info(s1, "user1", "user ", 2, "hello", "m");
+    p2.set_info(s2, "user12", "user ", 2, "hello", "m");
+    p3.set_username(s3);
+    usernames.push_back(s1);
+    usernames.push_back(s2);
+    community.add_person(p1);
+    community.add_person(p2);
+
+    EXPECT_FALSE(community.get_member(s1).read_msg());
+    community.send_msg(usernames, "hello, world");
+    EXPECT_TRUE(community.get_member(s1).read_msg());
+    EXPECT_TRUE(community.get_member(s2).read_msg());
+    EXPECT_FALSE(community.get_member(s3).read_msg());
 }
 
